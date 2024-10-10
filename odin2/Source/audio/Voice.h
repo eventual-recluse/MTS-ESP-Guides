@@ -36,6 +36,7 @@
 #include "Oscillators/VectorOscillator.h"
 #include "Oscillators/WavetableOsc2D.h"
 #include "ADSR.h"
+#include "MTS-ESP/Client/libMTSClient.h"
 
 #include <cstdlib>
 
@@ -46,6 +47,8 @@ struct Voice {
 	operator bool() const {
 		return m_voice_active;
 	}
+	
+	MTSClient *mtsClient = 0;
 
 	Voice() {
 		std::srand((unsigned int)std::time(nullptr));
@@ -80,9 +83,15 @@ struct Voice {
 			fm_osc[osc].setUnisonDetuneFactorPointer(&unison_detune_factor);
 			pm_osc[osc].setUnisonDetuneFactorPointer(&unison_detune_factor);
 		}
-
+		
+		mtsClient = MTS_RegisterClient();
 		amp.setUnisonPanPositionPointer(&unison_pan_position);
 		amp.setUnisonGainReductionPointer(&unison_gain_reduction);
+	}
+	
+	virtual ~Voice()
+	{
+		MTS_DeregisterClient(mtsClient);
 	}
 
 	void setAftertouch(int p_note_number, float p_value) {
@@ -128,7 +137,12 @@ struct Voice {
 	}
 
 	float MIDINoteToFreq(int p_MIDI_note) {
-		return m_tuning_ptr->frequencyForMidiNote(p_MIDI_note);
+		float freq = m_tuning_ptr->frequencyForMidiNote(p_MIDI_note);
+		if (mtsClient && MTS_HasMaster(mtsClient))
+		{
+			freq = MTS_NoteToFrequency(mtsClient, p_MIDI_note, -1);
+		}
+		return freq;
 		//return 27.5f * pow(2.f, (float)(p_MIDI_note - 21) / 12.f);
 	}
 

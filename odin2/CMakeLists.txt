@@ -5,6 +5,7 @@ project(Odin2 VERSION 2.3.4 LANGUAGES C CXX ASM)
 
 # ================== CMake Subdirs ======================
 add_subdirectory(libs/clap-juce-extensions)
+add_subdirectory(libs/oddsound-mts)
 if(UNIX AND NOT APPLE)
   add_subdirectory(libs/JUCELV2)
 else()
@@ -69,6 +70,7 @@ target_compile_definitions(Odin2
 
 # ==================== Check OS =======================
 target_include_directories(Odin2 PRIVATE ${CMAKE_BINARY_DIR}/include libs/tuning-library)
+target_include_directories(Odin2 PRIVATE libs/oddsound-mts)
 if(APPLE)
     target_compile_definitions(Odin2 PRIVATE ODIN_MAC=1)
     target_compile_options(Odin2 PRIVATE "-Wno-implicit-float-conversion")
@@ -1170,6 +1172,7 @@ juce_add_binary_data(Odin2_BinaryData
     "init_patch.odin"
 )
 set_target_properties(Odin2_BinaryData PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+set_target_properties(oddsound-mts PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
 
 # ==================== Linkage =======================
 target_link_libraries(Odin2
@@ -1193,4 +1196,5 @@ target_link_libraries(Odin2
     juce::juce_recommended_config_flags
     juce::juce_recommended_lto_flags
     #juce::juce_recommended_warning_flags
+    oddsound-mts
 )
