@@ -38,6 +38,39 @@ git clone https://github.com/ODDSound/MTS-ESP.git
 
 7. Build odin2 with CMake as described in the [odin2 README](https://github.com/TheWaveWarden/odin2)
 
+# [Wavetable](https://github.com/FigBug/Wavetable) version 1.0.21
+
+Altered source files: **plugin/Source/WavetableVoice.h plugin/Source/WavetableVoice.cpp**  (Updated files provided)<br>
+New directories: **modules/oddsound-mts**<br>
+New modules: MTS-ESP source code in **modules/oddsound-mts**<br>
+New CMakeLists.txt files: **modules/oddsound-mts/CMakeLists.txt**  (Provided)<br>
+Edited CMakeLists: **CMakeLists.txt** in the root Wavetable directory.  (Updated file provided)
+
+**Brief instructions:**
+
+1. After cloning Wavetable, replace CMakeLists.txt in the main Wavetable folder with the one from this repository.
+
+2. Replace plugin/Source/WavetableVoice.h and plugin/Source/WavetableVoice.cpp with the ones from this repository.
+
+3. Create a new folder named oddsound-mts in modules/
+
+4. Add oddsound-mts/CMakeLists.txt to the new folder, so **modules/oddsound-mts/** contains the new CMakeLists.txt
+
+6. Clone the MTS-ESP repository inside the oddsound-mts folder:
+```
+git clone https://github.com/ODDSound/MTS-ESP.git
+```
+**modules/oddsound-mts/** should now contain a CMakeLists.txt, and a folder named **MTS-ESP** which contains the MTS-ESP source code.
+
+7. Build step 1:
+```
+cmake -B build -D CMAKE_BUILD_TYPE=Release
+```
+8. Build step 2:
+```
+cmake --build build --config Release
+```
+
 # Credits and attribution
 [odin2](https://github.com/TheWaveWarden/odin2): GNU General Public License Version 3. Copyright (C) 2020 - 2021 TheWaveWarden
 

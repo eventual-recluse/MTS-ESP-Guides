@@ -90,6 +90,10 @@ endforeach()
 juce_add_module ("${CMAKE_CURRENT_LIST_DIR}/modules/melatonin_inspector")
 set_property (TARGET melatonin_inspector APPEND PROPERTY LABELS melatonin)
 
+# MTS-ESP
+add_subdirectory (modules/oddsound-mts)
+set_target_properties (oddsound-mts PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
+
 # Binary Data
 
 set_property (DIRECTORY APPEND PROPERTY LABELS Assets)
@@ -168,11 +172,14 @@ target_link_libraries (${PLUGIN_NAME} PRIVATE
 						juce::juce_gui_extra
 
     					juce::juce_recommended_config_flags
+    					
+    					oddsound-mts
 					)
 
 target_include_directories (${PLUGIN_NAME} PRIVATE modules/fmt/include)
 target_include_directories (${PLUGIN_NAME} PRIVATE modules/ASIO/common)
 target_include_directories (${PLUGIN_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Source/Definitions)
+target_include_directories (${PLUGIN_NAME} PRIVATE modules/oddsound-mts)
 
 juce_generate_juce_header (${PLUGIN_NAME})
 
