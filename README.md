@@ -41,5 +41,7 @@ git clone https://github.com/ODDSound/MTS-ESP.git
 # Credits and attribution
 [odin2](https://github.com/TheWaveWarden/odin2): GNU General Public License Version 3. Copyright (C) 2020 - 2021 TheWaveWarden
 
+[Wavetable](https://github.com/FigBug/Wavetable): BSD-3-Clause License. Copyright (c) 2020, Roland Rabien
+
 [MTS-ESP](https://github.com/ODDSound/MTS-ESP): [BSD Zero Clause License](https://github.com/ODDSound/MTS-ESP/blob/main/LICENSE) Copyright (C) 2021 by ODDSound Ltd. info@oddsound.com
 

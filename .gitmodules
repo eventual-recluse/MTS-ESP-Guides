@@ -1,3 +1,6 @@
 [submodule "odin2/libs/oddsound-mts/MTS-ESP"]
 	path = odin2/libs/oddsound-mts/MTS-ESP
 	url = https://github.com/ODDSound/MTS-ESP.git
+[submodule "Wavetable/modules/oddsound-mts/MTS-ESP"]
+	path = Wavetable/modules/oddsound-mts/MTS-ESP
+	url = https://github.com/ODDSound/MTS-ESP.git
